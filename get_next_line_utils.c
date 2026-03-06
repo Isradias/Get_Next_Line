@@ -6,12 +6,12 @@
 /*   By: icaldas- <icaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 03:27:58 by icaldas-          #+#    #+#             */
-/*   Updated: 2026/03/03 18:07:35 by icaldas-         ###   ########.fr       */
+/*   Updated: 2026/03/06 12:52:31 by icaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-/*
+
 void	*ft_calloc(int n)
 {
 	char	*ptr;
@@ -24,7 +24,7 @@ void	*ft_calloc(int n)
 	while (i < n)
 		ptr[i++] = '\0';
 	return ((void *)ptr);
-}*/
+}
 
 char	*ft_strchr(const char *s, int c)
 {

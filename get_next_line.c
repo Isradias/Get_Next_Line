@@ -6,25 +6,11 @@
 /*   By: icaldas- <icaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 03:27:58 by icaldas-          #+#    #+#             */
-/*   Updated: 2026/03/03 18:07:47 by icaldas-         ###   ########.fr       */
+/*   Updated: 2026/03/06 12:56:20 by icaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-void	*ft_calloc(int n)
-{
-	char	*ptr;
-	int		i;
-
-	ptr = malloc(n);
-	i = 0;
-	if (ptr == NULL)
-		return (NULL);
-	while (i < n)
-		ptr[i++] = '\0';
-	return ((void *)ptr);
-}
 
 static char	*ft_strjoin(char *s1, char const *s2)
 {
@@ -90,10 +76,7 @@ static char	*ft_read_join(char **stash, int fd)
 
 	buffer = ft_calloc(BUFFER_SIZE + 1);
 	if (!buffer)
-	{
-		free(buffer);
 		return (NULL);
-	}
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	i = 0;
 	while (bytes_read > 0)
@@ -114,17 +97,23 @@ static char	*ft_read_join(char **stash, int fd)
 char	*get_next_line(int fd)
 {
 	static char	*stash;
+	int			i;
 
+	i = 0;
 	if (stash == NULL)
 		stash = ft_calloc(1);
-	if (!stash || fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (!stash || fd < 0 || BUFFER_SIZE <= 0)
 	{
 		free(stash);
 		return (NULL);
 	}
+	while (stash[i] != '\n' && stash[i])
+		i++;
+	if (stash[i] == '\n')
+		return (ft_readed(&stash, i));
 	return (ft_read_join(&stash, fd));
 }
-/*
+
 #include <stdio.h>
 
 int	main(void)
@@ -132,7 +121,7 @@ int	main(void)
 	int	fd;
 	char	*line;
 
-	fd = open("teste.txt", O_RDONLY);
+	fd = open("texto.txt", O_RDONLY);
 	while ((line = get_next_line(fd)))
 	{
 		printf("%s", line);
@@ -140,7 +129,7 @@ int	main(void)
 	}
 	printf("%s", get_next_line(fd));
 	return (0);
-}*/
+}
 /*
 #include <stdio.h>
 
